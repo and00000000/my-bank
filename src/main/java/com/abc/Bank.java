@@ -33,6 +33,16 @@ public class Bank {
             total += c.totalInterestEarned();
         return total;
     }
+    
+    public double dailyInterestPaid()
+    {
+        double total=0;
+        for (Customer c: customers)
+             total += c.dailyInterestEarned();
+      
+        return total;
+    }
+    
 
     public String getFirstCustomer() {
         try {
