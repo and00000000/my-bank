@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.abc;
+
+import java.time.LocalDateTime;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
+/**
+ *
+ * @author and-i
+ */
+public class MaxiSavingsAccount extends Account{
+    
+    private LocalDateTime lastWithdrawal = null;
+
+     public MaxiSavingsAccount(){
+         
+    }
+     
+     //used withdraw function to store last withdrawal instead of using a forloop to go backwards into statement lists 
+     @Override
+    public void withdraw(double amount,String from) {
+        super.withdraw(amount,Transaction.WITHDRAWAL_FROM_CUSTOMER);
+        
+        int noOfTransactions = getTransactions().size();          
+        lastWithdrawal = getTransactions().get(noOfTransactions-1).getTransactionDate();
+            
+    }  
+            
+     public double annualInterestEarned(){
+        //interest rate is 5%
+        double interestRate=0.05;
+
+        //if there have been withdrawals in the transactions
+        if(lastWithdrawal!=null)
+        {
+         //find the number of days between today and the last withdrawal
+         long duration = DAYS.between(LocalDateTime.now(),lastWithdrawal );
+         
+         //if noOfDays is higher than 10 then the interest rate drops to 0.001
+         if (duration < 10){ 
+            interestRate = 0.001;        
+         }    
+        }
+        
+        //interestEarned is balance*interestRate
+         return getBalance()*interestRate;
+     
+    }
+     
+     
+     
+}
+    
