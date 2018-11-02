@@ -3,6 +3,7 @@ package com.abc;
 import java.util.Calendar;
 import java.util.Date;
 
+//class hasn't been used eventually
 public class DateProvider {
     private static DateProvider instance = null;
 
